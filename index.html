@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular | TodoMVC</title>
+</head>
+<body ng-app="todomvc">
+    <div ng-controller="TodomvcCtrl">
+        <h1>Todos</h1>
+
+        <form ng-submit="addTodo(newTodo)">
+            <input type="text" ng-model="newTodo">
+        </form>
+
+        <ul ng-repeat="todo in todos | filter:statusFilter">
+            <li class="todo-item">
+                <input type="text" ng-model="todo.title">
+                <input type="checkbox" ng-model="todo.completed">
+            </li>
+        </ul>
+
+        <ul class="filters">
+            <li><button ng-click="status='completed'">Completed</button></li>
+            <li><button ng-click="status='active'">Active</button></li>
+            <li><button ng-click="status=''">All</button></li>
+        </ul>
+
+        {{todos | json}}
+    </div>
+
+
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/TodomvcCtrl.js"></script>
+</body>
+</html>
