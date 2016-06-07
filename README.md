@@ -5,8 +5,8 @@ todomvc-angular
 
 * [x] Settings -- Jun 3, 2016
 * [x] Template -- Jun 3, 2016
-* [x] Controller -- Jum 3, 2016
-* [x] Service, TodomvcStorage
+* [x] Controller -- Jun 3, 2016
+* [x] Service, TodomvcStorage -- Jun 5, 2016
 * [ ] Directive
 * [ ] Filter
 * [ ] SPAgit
