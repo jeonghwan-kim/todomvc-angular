@@ -4,32 +4,20 @@
 
 
 angular.module('todomvc')
-    .controller('TodomvcCtrl', function ($scope) {
+    .controller('TodomvcCtrl', function ($scope, TodomvcStorage) {
 
-        $scope.todos = [{
-            title: 'todo 1',
-            completed: false
-        }, {
-            title: 'todo 2',
-            completed: false
-        }, {
-            title: 'todo 3',
-            completed: true
-        }];
+        var todos = $scope.todos = TodomvcStorage.get();
 
         $scope.addTodo = function (todoTitle) {
             todoTitle = todoTitle.trim();
-            if (!todoTitle) {
-                return;
-            }
+            if (!todoTitle) return;
 
             var newTodo = {
                 title: todoTitle,
                 completed: false
             };
 
-            $scope.todos.push(newTodo);
-
+            todos = TodomvcStorage.post(newTodo);
             $scope.newTodo = null;
         };
 
@@ -37,7 +25,16 @@ angular.module('todomvc')
 
         $scope.$watch('status', function () {
             $scope.statusFilter = ($scope.status === 'completed') ?
-            { completed: true }  : ($scope.status === 'active') ?
-            { completed: false } : {}
+            {completed: true} : ($scope.status === 'active') ?
+            {completed: false} : {}
         });
+
+        $scope.remove = function (todo) {
+            TodomvcStorage.delete(todo);    
+        };
+        
+        $scope.clearCompleted = function () {
+            TodomvcStorage.deleteCompleted();
+        };
+        
     });

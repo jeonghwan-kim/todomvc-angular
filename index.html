@@ -16,6 +16,7 @@
             <li class="todo-item">
                 <input type="text" ng-model="todo.title">
                 <input type="checkbox" ng-model="todo.completed">
+                <button ng-click="remove(todo)">Remove</button>
             </li>
         </ul>
 
@@ -24,6 +25,7 @@
             <li><button ng-click="status='active'">Active</button></li>
             <li><button ng-click="status=''">All</button></li>
         </ul>
+        <button ng-click="clearCompleted()">Clear Completed</button>
 
         {{todos | json}}
     </div>
@@ -33,5 +35,6 @@
     <script src="node_modules/angular/angular.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers/TodomvcCtrl.js"></script>
+    <script src="js/services/TodomvcStorage.js"></script>
 </body>
 </html>

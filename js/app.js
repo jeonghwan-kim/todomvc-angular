@@ -5,5 +5,5 @@
 
 angular.module('todomvc', [])
     .config(function () {
-        console.log('angular is loaded');
+
     });
