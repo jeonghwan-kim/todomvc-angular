@@ -3,47 +3,51 @@
  */
 
 angular.module('todomvc')
-    .factory('TodomvcStorage', function () {
+    .factory('TodomvcStorage', function ($http, $q) {
 
-        var storage = {
+      var storage = {
+        todos: [],
 
-            todos: [{
-                title: 'todo 1',
-                completed: false
-            }, {
-                title: 'todo 2',
-                completed: false
-            }, {
-                title: 'todo 3',
-                completed: true
-            }],
+        get: function () {
+          var deferred = $q.defer();
+          $http.get('/api/todos')
+              .then(function success(response) {
+                console.log(response.data);
+                deferred.resolve(angular.copy(response.data, storage.todos));
+              }, function error(err) {
+                console.error(err);
+                deferred.reject(err);
+              });
+          return deferred.promise;
+        },
 
-            get: function () {
-                return storage.todos;
-            },
+        post: function (todo) {
 
-            post: function (todo) {
-                storage.todos.push(todo);
-                return storage.todos;
-            },
+        },
 
-            delete: function (todo) {
-                if (!todo) return;
+        delete: function (todo) {
+          if (!todo) return;
 
-                var idx = storage.todos.indexOf(todo);
+          var deferred = $q.defer();
+          $http.delete('/api/todos/' + todo.id)
+              .then(function successs(response) {
                 storage.todos.splice(storage.todos.indexOf(todo), 1);
-            },
+              }, function error(err) {
+                console.error(err);
+              });
+          return deferred.promise;
+        },
 
-            deleteCompleted: function () {
-                var incompleteTodos = storage.todos.filter(function (todo) {
-                    return !todo.completed;
-                });
+        deleteCompleted: function () {
+          var incompleteTodos = storage.todos.filter(function (todo) {
+            return !todo.completed;
+          });
 
-                angular.copy(incompleteTodos, storage.todos);
-                // return storage.todos;
-            }
+          angular.copy(incompleteTodos, storage.todos);
+          // return storage.todos;
+        }
 
-        };
+      };
 
-        return storage;
+      return storage;
     });

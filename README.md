@@ -88,6 +88,12 @@ ngDirective
 
 ### Express.js
 
+서버 기능
+
+* 웹페이지 호스팅
+* 데이터베이스
+
+
 ```
 $ npm isntall expressjs --save
 ```
@@ -100,22 +106,31 @@ $ node server/app.js
 
 ### Web hosting
 
-static
-
-### Postman
-
-install [link]()
+```javascript
+app.use(express.static(path.join(__dirname, '../client')));
+app.use('/node_modules', express.static(path.join(__dirname, '../node_modules')));
+```
 
 
 ### REST API
 
 GET /todos
 
+DELETE /todos/:id
+
 POST /todos
 
 PUT /todos/:id
 
-DELETE /todos/:id
+
+### Postman
+
+install [link]()
+
+
+### Ajax
+
+$http
 
 
 ### Router

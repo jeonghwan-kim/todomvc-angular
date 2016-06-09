@@ -6,35 +6,37 @@
 angular.module('todomvc')
     .controller('TodomvcCtrl', function ($scope, TodomvcStorage) {
 
-        var todos = $scope.todos = TodomvcStorage.get();
+      TodomvcStorage.get().then(function (todos) {
+        $scope.todos = todos;
+      });
 
-        $scope.addTodo = function (todoTitle) {
-            todoTitle = todoTitle.trim();
-            if (!todoTitle) return;
+      $scope.addTodo = function (todoTitle) {
+        todoTitle = todoTitle.trim();
+        if (!todoTitle) return;
 
-            var newTodo = {
-                title: todoTitle,
-                completed: false
-            };
-
-            todos = TodomvcStorage.post(newTodo);
-            $scope.newTodo = null;
+        var newTodo = {
+          title: todoTitle,
+          completed: false
         };
 
-        $scope.status = '';
+        $scope.todos = TodomvcStorage.post(newTodo);
+        $scope.newTodo = null;
+      };
 
-        $scope.$watch('status', function () {
-            $scope.statusFilter = ($scope.status === 'completed') ?
-            {completed: true} : ($scope.status === 'active') ?
-            {completed: false} : {}
-        });
+      $scope.status = '';
 
-        $scope.remove = function (todo) {
-            TodomvcStorage.delete(todo);    
-        };
-        
-        $scope.clearCompleted = function () {
-            TodomvcStorage.deleteCompleted();
-        };
-        
+      $scope.$watch('status', function () {
+        $scope.statusFilter = ($scope.status === 'completed') ?
+        {completed: true} : ($scope.status === 'active') ?
+        {completed: false} : {}
+      });
+
+      $scope.remove = function (todo) {
+        TodomvcStorage.delete(todo);
+      };
+
+      $scope.clearCompleted = function () {
+        TodomvcStorage.deleteCompleted();
+      };
+
     });
