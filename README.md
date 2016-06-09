@@ -7,6 +7,7 @@ todomvc-angular
 * [x] Template -- Jun 3, 2016
 * [x] Controller -- Jun 3, 2016
 * [x] Service, TodomvcStorage -- Jun 5, 2016
+* [x] Twitter Bootstrap
 * [ ] Directive
 * [ ] Filter
 * [ ] SPAgit
