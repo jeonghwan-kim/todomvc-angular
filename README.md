@@ -118,7 +118,7 @@ GET /todos
 
 DELETE /todos/:id
 
-POST /todos
+POST /todos: bodyParser 필요함
 
 PUT /todos/:id
 

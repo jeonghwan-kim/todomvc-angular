@@ -16,11 +16,13 @@ angular.module('todomvc')
 
         var newTodo = {
           title: todoTitle,
-          completed: false
         };
 
-        $scope.todos = TodomvcStorage.post(newTodo);
-        $scope.newTodo = null;
+        TodomvcStorage.post(newTodo)
+            .then(function (todo) {
+              $scope.todos.push(todo);
+              $scope.newTodo = null;
+            });
       };
 
       $scope.status = '';

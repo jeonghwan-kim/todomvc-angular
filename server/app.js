@@ -1,6 +1,8 @@
 var express = require('express');
 var path = require('path');
+var bodyParser = require('body-parser');
 var app = express();
+
 var todos = [{
   id: 1,
   title: 'todo 1',
@@ -14,6 +16,10 @@ var todos = [{
   title: 'todo 3',
   completed: true
 }];
+
+// body parser
+app.use(bodyParser());
+
 
 // static files
 app.use(express.static(path.join(__dirname, '../client')));
@@ -36,6 +42,21 @@ app.delete('/api/todos/:id', function (req, res) {
   }
 
   res.send();
+});
+
+app.post('/api/todos', function (req, res) {
+  if (!req.body.title) {
+    return res.status(400).send();
+  }
+
+  var todo = {
+    id: todos[todos.length - 1].id + 1,
+    title: req.body.title,
+    completed: req.body.completed || false
+  }
+
+  todos.push(todo);
+  res.json(todo);
 });
 
 

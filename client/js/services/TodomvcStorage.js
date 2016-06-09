@@ -22,7 +22,16 @@ angular.module('todomvc')
         },
 
         post: function (todo) {
-
+          var deferred = $q.defer();
+          $http.post('/api/todos', {
+            title: todo.title
+          }).then(function success(response) {
+            deferred.resolve(response.data);
+          }, function (err) {
+            console.error(err);
+            deferred.reject(err);
+          });
+          return deferred.promise;
         },
 
         delete: function (todo) {
