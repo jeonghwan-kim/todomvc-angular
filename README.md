@@ -6,7 +6,7 @@ todomvc-angular
 
 ### 우리가 만들 Todo 앱 미리보기
 
-![]()
+![screenshot](screenshot.png)
 
 
 ### 백엔드에서 프론트까지 설명
