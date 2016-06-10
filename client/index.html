@@ -30,7 +30,7 @@
 
   <ul ng-repeat="todo in todos | filter:statusFilter" class="list-unstyled">
     <li class="todo-item">
-      <todo-item todo="todo" remove="remove(todo)"></todo-item>
+      <todo-item todo="todo" remove="remove(todo)" update="update(todo)"></todo-item>
     </li>
   </ul>
 

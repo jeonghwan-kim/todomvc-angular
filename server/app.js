@@ -18,7 +18,8 @@ var todos = [{
 }];
 
 // body parser
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // static files
@@ -30,16 +31,21 @@ app.get('/api/todos', function (req, res) {
   res.json(todos)
 });
 
-app.delete('/api/todos/:id', function (req, res) {
-  var id = parseInt(req.params.id, 10);
-
-  var foundTodo = todos.findIndex(function (todo) {
-    return todo.id === id
+app.delete('/api/todos/:ids', function (req, res) {
+  console.log(req.params.ids);
+  var ids = req.params.ids.split(',').map(function (id) {
+    return parseInt(id, 10);
   });
 
-  if (foundTodo > -1) {
-    todos.splice(foundTodo, 1);
-  }
+  ids.forEach(function (id) {
+    var foundTodo = todos.findIndex(function (todo) {
+      return todo.id === id
+    });
+
+    if (foundTodo > -1) {
+      todos.splice(foundTodo, 1);
+    }
+  });
 
   res.send();
 });
@@ -50,15 +56,33 @@ app.post('/api/todos', function (req, res) {
   }
 
   var todo = {
-    id: todos[todos.length - 1].id + 1,
+    id: todos.length === 0 ? 1 : todos[todos.length - 1].id + 1,
     title: req.body.title,
     completed: req.body.completed || false
-  }
+  };
 
   todos.push(todo);
   res.json(todo);
 });
 
+app.put('/api/todos/:id', function (req, res) {
+  // find todo
+  var id = parseInt(req.params.id, 10);
+  var idx = todos.findIndex(function (todo) {
+    return todo.id === id;
+  });
+
+  if (idx === -1) {
+    return res.status(404).send();
+  }
+
+  // update todo
+  todos[idx].title = req.body.title;
+  todos[idx].completed = req.body.completed;
+
+  // return updated todo
+  res.json(todos[idx]);
+});
 
 
 app.get('/', function (req, res) {

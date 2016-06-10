@@ -37,6 +37,10 @@ angular.module('todomvc')
         TodomvcStorage.delete(todo);
       };
 
+      $scope.update = function (todo) {
+        TodomvcStorage.update(todo);
+      };
+
       $scope.clearCompleted = function () {
         TodomvcStorage.deleteCompleted();
       };

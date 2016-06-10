@@ -47,13 +47,39 @@ angular.module('todomvc')
           return deferred.promise;
         },
 
-        deleteCompleted: function () {
-          var incompleteTodos = storage.todos.filter(function (todo) {
-            return !todo.completed;
-          });
+        update: function (todo) {
+          if (!todo) return;
 
-          angular.copy(incompleteTodos, storage.todos);
-          // return storage.todos;
+          var deferred = $q.defer();
+          $http.put('/api/todos/' + todo.id, todo)
+              .then(function successs(response) {
+                console.log(response);
+              }, function error(err) {
+                console.error(err);
+              });
+          return deferred.promise;
+        },
+
+        deleteCompleted: function () {
+          // Filter completed todo id list
+          var completedTodos = storage.todos.filter(function (todo) {
+            return todo.completed;
+          });
+          var completedTodoIds = completedTodos.map(function (todo) {
+            return todo.id;
+          });
+          console.log(completedTodoIds);
+
+          $http.delete('/api/todos/' + completedTodoIds.join(','))
+              .then(function success (response) {
+                var incompleteTodos = storage.todos.filter(function (todo) {
+                  return !todo.completed;
+                });
+
+                angular.copy(incompleteTodos, storage.todos);
+              }, function (error) {
+
+              })
         }
 
       };
