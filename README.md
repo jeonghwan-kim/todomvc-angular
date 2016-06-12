@@ -8,10 +8,20 @@ todomvc-angular
 
 ![screenshot](screenshot.png)
 
+* 서버에 저장된 Todo 목록을 웹페이지에 보여줌
+* 기존 Todo 의 내용, 삭제, 완료 처리할 수 있음
+* 새로운 Todo를 입력하면 기존 투두에 추가됨
+* Todo 상태에 따라 complteded, acitve로 필터링 할 수 있음
+* 완료된 Todo 들은 목록에서 제거할 수 있음
 
-### 백엔드에서 프론트까지 설명
 
-...
+### 프로젝트 구조
+
+* 서버는 Node.js기반의 Express.js 웹프레임웍을 사용함
+* 서버는 1) html, css, javascript 등의 정적 파일을 제공하고 2) ajax 기능을 수행할 api를 제공함  
+* 웹페이지는 Angular.js를 사용한 하나의 페이지(index.html )로 구성됨
+* 앵귤러 컨트롤러로 웹페이지를 조작하고 앵귤러 서비스를 통해 백엔드 api와 통신함
+![그림]()
 
 
 ### Nodejs
@@ -25,61 +35,119 @@ $ which node
 
 ### Npm
 
-npm은 1) 외부 라이브러리를 설치하고 2) 노드 서버를 구동하는데 사용할 것임
+npm을 이용하여 개발 진행
+
+* angularjs등 외부 라이브러리를 설치하고
+* 노드 서버를 구동할 수 있음
+
+
+설치:
 
 ```
 $ npm --version
 $ which npm
 ```
 
-npm으로 프로젝트 생성
+npm으로 프로젝트 생성:
 
 ```
 $ npm init
+```
+
+
+### index.html
+
+```
 $ touch index.html
 ```
 
+
 ### Angular Setting
 
-angularjs 설치
+Angular.js 설치
 
 ```
 $ npm install angular --save
 ```
 
-ngApp
+index.html에 angular.js 로딩
 
-
-### Template
-
-index.html
+```html
+<html ng-app="todomvc">
+  <!--  여기서 부터는 todomvc라는 앵귤러 모듈 영역임 -->
+</html>
+```
 
 
 ### Controller
 
-TodomvcCtrl.js
+TodomvcCtrl.js:
 
-ngController
+```javascript
+angular.module('todomvc')
+    .controller('TodomvcCtrl', function ($scope) {
+      $scope.message = 'Hello world!';
+    });
+```
+
+$scope 변수의 역할:
+
+* 템플릿과 컨트롤러간의 데이터 연결
+
+
+index.html:
+
+```html
+<body ng-controller="TodomvcCtrl">
+  <p>
+    {{ message }} <!-- "Hello world!" -->
+  </p>
+</body>
+
+```
 
 
 ### Service
 
-TodomvcStorage.js
+todomvcStorage.js
 
-angular.factory()
+```javascript
+angular.module('todomvc')
+    .facgtory('todomvcStorage', function () {
+      var storage = {
+        // ...
+      }
+
+      return storage;
+    });
+```
+
+서비스의 역할:
+
+* 데이터 저장소의 역할
+* 백엔드가 연결되면 api를 활용하여 서버 데이터를 핸들링하는 역할
 
 
 ### Stylesheet
 
 [https://github.com/twbs/bootstrap](https://github.com/twbs/bootstrap)
 
+npm으로 부트스트랩 설치:
+
 ```
 $ npm install bootstrap@3 --save
 ```
 
+index.html에 스타일시트 로딩:
+
+```html
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+```
+
+
 ### Directive
 
-ngDirective
+index.html:
 
 ```html
 <todo-item todo="todo" remove="remove(todo)"></todo-item>
@@ -138,5 +206,3 @@ $http
 ### Homework
 
 unit test
-
-
