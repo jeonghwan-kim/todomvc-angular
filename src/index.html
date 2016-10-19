@@ -10,9 +10,9 @@
       <li ng-repeat="todo in todos">
         <input type="text" name="todo" ng-model="todo.title" />
         <input type="checkbox" name="name" ng-model="todo.done" />
+        <input type="button" ng-click="onRemove(todo)" value="X"/>
       </li>
     </ul>
-    <pre>{{ todos | json }}</pre>
     <script src="../node_modules/angular/angular.js"></script>
     <script src="app.js"></script>
   </body>
