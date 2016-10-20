@@ -8,9 +8,20 @@
       { id: 3, title: '청소', done: false }
     ];
 
+    $scope.onCreate = title => {
+      if (title) {
+        todos.push({
+          id: todos.reduce((max, t) => t.id > max.id ? t : max).id + 1,
+          title: title,
+          done: false
+        });
+      }
+      $scope.newTodoTitle = '';
+    };
+
     $scope.onRemove = todo => {
       angular.copy(todos.filter(t => t.id !== todo.id), todos);
     };
 
   });
-})()
+})();

@@ -6,13 +6,32 @@
   </head>
   <body ng-controller="TodoCtrl">
     <h1>Todos</h1>
+
     <ul>
-      <li ng-repeat="todo in todos">
+      <li>
+        <form name="input-form" ng-submit="onCreate(newTodoTitle)">
+          <input type="text" ng-model="newTodoTitle" autofocus ng-trim="true">
+          <input type="submit" value="+">
+        </form>
+
+      </li>
+    </ul>
+
+    <ul>
+      <li ng-repeat="todo in todos | filter: status">
         <input type="text" name="todo" ng-model="todo.title" />
         <input type="checkbox" name="name" ng-model="todo.done" />
         <input type="button" ng-click="onRemove(todo)" value="X"/>
       </li>
     </ul>
+
+    <ul>
+      <li><button ng-click="status={done: true}">Done</button></li>
+      <li><button ng-click="status={done: false}">Pending</button></li>
+      <li><button ng-click="status={}">All</button></li>
+    </ul>
+
+    <pre>{{ todos | json}}</pre>
     <script src="../node_modules/angular/angular.js"></script>
     <script src="app.js"></script>
   </body>

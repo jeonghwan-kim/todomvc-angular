@@ -11,4 +11,4 @@ ng-app, ng-init, {{ msg }}
 
 EMCAScript 6에 대한 간단 정리
 
-bootstrap이 아니라 sementic-ui
+ng-trim, ngForm, ng-submit
