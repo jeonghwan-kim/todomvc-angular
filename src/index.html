@@ -18,11 +18,12 @@
     </ul>
 
     <ul>
-      <li ng-repeat="todo in todos | filter: status">
+      <li ng-repeat="todo in todos | filter: status as results">
         <input type="text" name="todo" ng-model="todo.title" />
         <input type="checkbox" name="name" ng-model="todo.done" />
         <input type="button" ng-click="onRemove(todo)" value="X"/>
       </li>
+      <li ng-if="results.length === 0">No results.</li>
     </ul>
 
     <ul>
