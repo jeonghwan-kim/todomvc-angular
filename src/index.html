@@ -17,11 +17,10 @@
       </li>
     </ul>
 
+
     <ul>
       <li ng-repeat="todo in todos | filter: status as results">
-        <input type="text" name="todo" ng-model="todo.title" />
-        <input type="checkbox" name="name" ng-model="todo.done" />
-        <input type="button" ng-click="onRemove(todo)" value="X"/>
+        <todo-item todo="todo" remove="onRemove(todo)"></todo-item>
       </li>
       <li ng-if="results.length === 0">No results.</li>
     </ul>
@@ -34,6 +33,7 @@
 
     <pre>{{ todos | json}}</pre>
     <script src="../node_modules/angular/angular.js"></script>
-    <script src="app.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/directives/todo.directive.js"></script>
   </body>
 </html>
