@@ -5,22 +5,24 @@
     <title>TodoMVC</title>
     <link rel="stylesheet" href="./styles/app.css">
   </head>
-  <body ng-controller="TodoCtrl">
-    <h1>Todos</h1>
+  <body>
 
-    <todo-form create="onCreate(title)"></todo-form>
-    <todo-list todos="todos" status="status" on-remove="onRemove(todo)"></todo-list>
-    <todo-filters status="status"></todo-filters>
+    <header>
+      <h1>Todos</h1>
+    </header>
 
-    <hr>
-    <pre>status: {{ status | json}}</pre>
-    <pre>todos: {{ todos | json}}</pre>
+    <ng-view></ng-view>
 
-    <script src="../node_modules/angular/angular.js"></script>
+    <footer>
+      <i>angular codelab</i>
+    </footer>
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
 
     <script src="js/app.js"></script>
 
-    <script src="js/controllers/app.controller.js"></script>
+    <script src="js/controllers/main.controller.js"></script>
 
     <script src="js/directives/todo-item.directive.js"></script>
     <script src="js/directives/todo-list.directive.js"></script>

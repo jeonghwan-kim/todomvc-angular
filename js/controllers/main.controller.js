@@ -1,9 +1,25 @@
-angular.module('todomvc').controller('TodoCtrl', $scope => {
+angular.module('todomvc').controller('MainCtrl', function($scope, $routeParams, $location) {
   let todos = $scope.todos = [
     { id: 1, title: ':private yoga',      done: false, createdAt: Date.now() },
     { id: 2, title: ':private: reading',  done: true,  createdAt: Date.now() - 3600000 * 1 },
     { id: 3, title: ':private: cleaning', done: false, createdAt: Date.now() - 3600000 * 2 }
   ];
+
+  const status = (statusParam) => {
+    if (!statusParam) return;
+    switch(statusParam.toLowerCase()) {
+      case 'done':
+        return true;
+      case 'pending':
+        return false;
+      default:
+        $location.path('/');
+    }
+  }
+
+  $scope.status = {
+    done: status($routeParams.status)
+  };
 
   $scope.onCreate = title => {
     if (title) {
