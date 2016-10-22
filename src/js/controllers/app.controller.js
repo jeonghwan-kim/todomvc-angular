@@ -10,7 +10,8 @@ angular.module('todomvc').controller('TodoCtrl', $scope => {
       todos.push({
         id: todos.reduce((max, t) => t.id > max ? t.id : max, 0).id + 1,
         title: title,
-        done: false
+        done: false,
+        createdAt: Date.now()
       });
     }
   };

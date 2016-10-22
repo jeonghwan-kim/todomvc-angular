@@ -1,0 +1,11 @@
+input[type="text"].ng-dirty.ng-valid {
+  background: green;
+}
+
+input[type="text"].ng-dirty.ng-invalid {
+  background: red;
+}
+
+.warn-msg {
+  color: red;
+}
