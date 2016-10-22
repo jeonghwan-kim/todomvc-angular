@@ -7,31 +7,20 @@
   <body ng-controller="TodoCtrl">
     <h1>Todos</h1>
 
-    <ul>
-      <li>
-        <todo-form create="onCreate(title)"></todo-form>
-      </li>
-    </ul>
+    <todo-form create="onCreate(title)"></todo-form>
+    <todo-list todos="todos" status="status" on-remove="onRemove(todo)"></todo-list>
+    <todo-filters status="status"></todo-filters>
 
+    <hr>
+    <pre>status: {{ status | json}}</pre>
+    <pre>todos: {{ todos | json}}</pre>
 
-    <ul>
-      <li ng-repeat="todo in todos | filter: status as results">
-        <todo-item todo="todo" remove="onRemove(todo)"></todo-item>
-      </li>
-      <li ng-if="results.length === 0">No results.</li>
-    </ul>
-
-    <ul>
-      <li><button ng-click="status={done: true}">Done</button></li>
-      <li><button ng-click="status={done: false}">Pending</button></li>
-      <li><button ng-click="status={}">All</button></li>
-    </ul>
-
-    <pre>{{ todos | json}}</pre>
     <script src="../node_modules/angular/angular.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers/app.controller.js"></script>
     <script src="js/directives/todo-item.directive.js"></script>
+    <script src="js/directives/todo-list.directive.js"></script>
     <script src="js/directives/todo-form.directive.js"></script>
+    <script src="js/directives/todo-filters.directive.js"></script>
   </body>
 </html>

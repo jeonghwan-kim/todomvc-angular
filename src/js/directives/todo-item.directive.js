@@ -3,12 +3,13 @@ angular.module('todomvc').directive('todoItem', () => {
     restrict: 'E',
     scope: {
       todo: '=',
-      remove: '&'
+      onRemove: '&'
     },
     template: `
         <input type="text"  ng-model="todo.title" />
         <input type="checkbox" ng-model="todo.done" />
-        <input type="button" ng-click="remove(todo)" value="X"/>
+        <span>{{todo.createdAt | date: 'short'}}</span>
+        <input type="button" ng-click="onRemove({todo: todo})" value="X"/>
        `
   };
 });

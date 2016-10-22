@@ -1,8 +1,8 @@
 angular.module('todomvc').controller('TodoCtrl', $scope => {
   let todos = $scope.todos = [
-    { id: 1, title: 'yoga',     done: false },
-    { id: 2, title: 'reading',  done: true },
-    { id: 3, title: 'cleaning', done: false }
+    { id: 1, title: 'yoga',     done: false, createdAt: Date.now() - 3600000},
+    { id: 2, title: 'reading',  done: true,  createdAt: Date.now() - 3600000 * 2 },
+    { id: 3, title: 'cleaning', done: false, createdAt: Date.now() - 3600000 * 3 }
   ];
 
   $scope.onCreate = title => {
