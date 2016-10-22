@@ -9,11 +9,7 @@
 
     <ul>
       <li>
-        <form name="input-form" ng-submit="onCreate(newTodoTitle)">
-          <input type="text" ng-model="newTodoTitle" autofocus ng-trim="true">
-          <input type="submit" value="+">
-        </form>
-
+        <todo-form create="onCreate(title)"></todo-form>
       </li>
     </ul>
 
@@ -34,6 +30,8 @@
     <pre>{{ todos | json}}</pre>
     <script src="../node_modules/angular/angular.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/directives/todo.directive.js"></script>
+    <script src="js/controllers/app.controller.js"></script>
+    <script src="js/directives/todo-item.directive.js"></script>
+    <script src="js/directives/todo-form.directive.js"></script>
   </body>
 </html>
