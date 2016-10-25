@@ -1,5 +1,5 @@
 input[type="text"].ng-dirty.ng-valid {
-  background: green;
+  background: white;
 }
 
 input[type="text"].ng-dirty.ng-invalid {

@@ -21,7 +21,12 @@ angular.module('todomvc')
     },
 
     destory(todo) {
-      angular.copy(this.data.filter(t => t.id !== todo.id), this.todos);
+      angular.copy(this.data.filter(t => t.id !== todo.id), this.data);
+      localStorage.setItem('TODO_DATA', JSON.stringify(this.data));
+    },
+
+    update() {
+      localStorage.setItem('TODO_DATA', JSON.stringify(this.data));
     }
   };
 

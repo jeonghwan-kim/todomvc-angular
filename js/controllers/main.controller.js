@@ -1,7 +1,7 @@
 angular.module('todomvc').controller('MainCtrl', function($scope, $routeParams, $location, todoStorage) {
   $scope.todos = todoStorage.get();
 
-  const status = (statusParam) => {
+  const status = statusParam => {
     if (!statusParam) return;
     switch(statusParam.toLowerCase()) {
       case 'done':
@@ -22,4 +22,6 @@ angular.module('todomvc').controller('MainCtrl', function($scope, $routeParams, 
   };
 
   $scope.onRemove = todo => todoStorage.destory(todo);
+
+  $scope.onUpdate = _=> todoStorage.update();
 });
