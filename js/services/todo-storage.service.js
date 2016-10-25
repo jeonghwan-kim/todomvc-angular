@@ -1,33 +1,37 @@
 angular.module('todomvc')
 .factory('todoStorage', () => {
+  const _LSKey = 'TODO_DATA';
+  const _loadFromLS = _=> JSON.parse(localStorage.getItem(_LSKey));
+  const _saveToLS = data => localStorage.setItem(_LSKey, JSON.stringify(data));
+  const _genId = () => {
+    if (!storage.data.length) return 1;
+    else return storage.data.reduce((max, t) => t.id > max ? t.id : max, 0) + 1;
+  };
+
   const storage = {
     data: [],
 
     get() {
-      const t = JSON.parse(localStorage.getItem('TODO_DATA'))
-      angular.copy(t, this.data);
+      angular.copy(_loadFromLS(), this.data);
       return this.data;
     },
 
     create(title) {
       this.data.push({
-        id: this.data.reduce((max, t) => t.id > max ? t.id : max, 0).id + 1,
+        id: _genId(),
         title: title,
         done: false,
         createdAt: Date.now()
       });
-
-      localStorage.setItem('TODO_DATA', JSON.stringify(this.data));
+      _saveToLS(this.data);
     },
 
     destory(todo) {
       angular.copy(this.data.filter(t => t.id !== todo.id), this.data);
-      localStorage.setItem('TODO_DATA', JSON.stringify(this.data));
+      _saveToLS(this.data);
     },
 
-    update() {
-      localStorage.setItem('TODO_DATA', JSON.stringify(this.data));
-    }
+    update() { _saveToLS(this.data); }
   };
 
   return storage;
