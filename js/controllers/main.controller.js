@@ -23,5 +23,5 @@ angular.module('todomvc').controller('MainCtrl', function($scope, $routeParams, 
 
   $scope.onRemove = todo => todoStorage.destory(todo);
 
-  $scope.onUpdate = _=> todoStorage.update();
+  $scope.onUpdate = todo => todoStorage.update(todo);
 });

@@ -4,7 +4,7 @@
 <a href="/#/done">Done</a>
 
 <todo-form create="onCreate(title)"></todo-form>
-<todo-list todos="todos" status="status" on-remove="onRemove(todo)" on-update="onUpdate()"></todo-list>
+<todo-list todos="todos" status="status" on-remove="onRemove(todo)" on-update="onUpdate(todo)"></todo-list>
 
 <hr>
 <pre>status: {{ status | json}}</pre>

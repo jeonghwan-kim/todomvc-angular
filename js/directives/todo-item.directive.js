@@ -8,7 +8,7 @@ angular.module('todomvc').directive('todoItem', ($filter) => {
     },
     template: `
       <form name="editForm" ng-submit="onUpdate()">
-        <input type="checkbox" ng-model="todo.done" ng-click="onUpdate()" />
+        <input type="checkbox" ng-model="todo.done" ng-click="onUpdate(todo)" />
         <input type="text"  name="title" ng-model="todo.title" ng-blur="updateTitle()"
                ng-trim="true"
                ng-minlength="2"
@@ -27,7 +27,7 @@ angular.module('todomvc').directive('todoItem', ($filter) => {
 
        scope.updateTitle = _=> {
          if (scope.editForm.title.$invalid) return;
-         scope.onUpdate();
+         scope.onUpdate(scope.todo);
        }
      }
   };
