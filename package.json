@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/.bin/browser-sync start --server --browser 'google chrome' --files 'js' 'styles' 'templates' 'index.html'"
+    "start": "node_modules/.bin/lite-server"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/jeonghwan-kim/todomvc-angular#readme",
   "devDependencies": {
-    "browser-sync": "^2.17.5"
+    "lite-server": "^2.2.2"
   },
   "dependencies": {
     "angular": "^1.5.8",
